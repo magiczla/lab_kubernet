@@ -1,0 +1,83 @@
+https://kubernetes.io/ja/docs/setup/learning-environment/minikube/
+
+minikube config set driver docker
+
+minikube start --driver=hyperv
+minikube start --driver=docker
+
+docker (driver installation)
+virtualbox (driver installation)
+podman (driver installation) (実験的)
+vmwarefusion
+kvm2 (driver installation)
+hyperkit (driver installation)
+hyperv (driver installation) 注意: 以下のIPは動的であり、変更される可能性があります。IPはminikube ipで取得することができます。
+vmware (driver installation) (VMware unified driver)
+parallels (driver installation)
+none (VMではなくホスト上でKubernetesコンポーネントを起動。このドライバーを使用するにはDockerとLinux環境を必要とします)
+
+
+PS C:\windows\system32> minikube start --driver=hyperv
+* Microsoft Windows 10 Enterprise 10.0.18363 Build 18363 上の minikube v1.16.0
+* 設定を元に、 hyperv ドライバを使用します
+* VM ブートイメージをダウンロードしています...
+    > minikube-v1.16.0.iso.sha256: 65 B / 65 B [-------------] 100.00% ? p/s 0s
+    > minikube-v1.16.0.iso: 212.62 MiB / 212.62 MiB [] 100.00% 23.07 MiB p/s 9s
+* コントロールプレーンのノード minikube を minikube 上で起動しています
+* hyperv VM (CPUs=2, Memory=4000MB, Disk=20000MB) を作成しています...
+* Docker 20.10.0 で Kubernetes v1.20.0 を準備しています...
+  - Generating certificates and keys ...
+  - Booting up control plane ...
+  - Configuring RBAC rules ...
+* Kubernetes コンポーネントを検証しています...
+* 有効なアドオン: storage-provisioner, default-storageclass
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
+
+
+kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+kubectl get pod
+minikube service hello-minikube --url
+
+
+kubectl delete services hello-minikube
+kubectl delete deployment hello-minikube
+
+minikube stop
+minikube delete
+
+kubectl get nodes
+kubectl get pods 
+kubectl get services
+
+https://www.youtube.com/watch?v=X48VuDVv0do&ab_channel=TechWorldwithNana
+
+kubectl create deployment nginx --image=nginx
+kubectl get deployment
+kubectl get pod
+kubectl get replicaset
+kubectl edit deployment nginx
+kubectl get pod
+kubectl logs nginx-5bb97498bb-qkx8x
+
+kubectl create deployment mongo-depl --image=mongo
+kubectl describe pod mongo-depl-5fd6b7d4b4-wmgxq
+
+kubectl exec -it mongo-depl-5fd6b7d4b4-wmgxq -- bin/bash
+
+kubectl get deployment
+kubectl delete deployment mongo-depl
+
+kubectl get pod -o wide
+kubectl get pod --watch
+kubectl get deployment nginx-deployment -o yaml
+
+kubectl delete deployment nginx-deployment
+kubectl delete service nginx-service
+
+kubectl get all
+kubectl get secret
+
+
+minikube service mongo-express-service
